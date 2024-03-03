@@ -1,0 +1,30 @@
+:root {
+  --primary-light: #fff;
+  --font-light: #09090b;
+  --secondary-light: #fff;
+  --theme-light: #2260e5;
+
+  --font-dark: #fff;
+  --primary-dark: #09090b;
+  --secondary-dark: #020817;
+  --theme-dark: #2260e5;
+}
+
+.Light {
+  --primary: var(--primary-light);
+  --font: var(--font-light);
+  --secondary: var(--secondary-light);
+  --theme: var(--theme-light);
+}
+
+.Dark {
+  --primary: var(--primary-dark);
+  --font: var(--font-dark);
+  --secondary: var(--secondary-dark);
+  --theme: var(--theme-dark);
+}
+
+body {
+  background-color: var(--primary);
+  color: var(--font);
+}
