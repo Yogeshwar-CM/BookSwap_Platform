@@ -1,6 +1,6 @@
 .Home {
-  height: 100vh;
   display: flex;
+  padding-bottom: 10rem;
   flex-direction: column;
   align-items: center;
 }

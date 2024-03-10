@@ -1,0 +1,36 @@
+.expsec {
+  display: flex;
+  width: 85vw;
+  font-family: "Arial";
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  font-size: clamp(1.15rem, 1.062rem + 0.3756vw, 1.4rem);
+  gap: 4rem;
+}
+.expsec img {
+  height: 16rem;
+}
+.exp-dets {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile {
+  border-radius: 1000000px;
+  max-height: 8rem;
+}
+
+.swap-btn,
+.contact-btn {
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  font-size: clamp(1rem, 0.9296rem + 0.3005vw, 1.15rem);
+  background: var(--theme);
+  color: var(--font);
+  height: 2.6rem;
+  border-radius: 3px;
+  margin-top: 1.2rem;
+  border: none;
+}
