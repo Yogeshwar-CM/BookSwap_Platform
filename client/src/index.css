@@ -6,8 +6,12 @@
 
   --font-dark: #fff;
   --primary-dark: #09090b;
-  --secondary-dark: #020817;
+  --secondary-dark: #1d1d1d;
   --theme-dark: #2260e5;
+}
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .Light {
@@ -24,7 +28,7 @@
   --theme: var(--theme-dark);
 }
 
-body {
+#root {
   background-color: var(--primary);
   color: var(--font);
 }

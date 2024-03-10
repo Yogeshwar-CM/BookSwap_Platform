@@ -1,0 +1,14 @@
+.theme-btn {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  color: var(--font);
+  cursor: pointer;
+  justify-content: center;
+  background: none;
+  border: none;
+}
+
+.theme-btn:hover {
+  transform: scale(1.2);
+}
