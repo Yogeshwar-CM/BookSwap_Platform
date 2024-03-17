@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(true); // State to toggle between login and registration
+  const [isLogin, setIsLogin] = useState(true); 
 
   const handleAuthAction = async (e) => {
     e.preventDefault();
