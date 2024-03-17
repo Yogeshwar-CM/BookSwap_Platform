@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 import ExpSec from "../components/ExpSec";
+// import ToggleTheme from "../components/ToggleTheme";
 
 const Home = () => {
   return (

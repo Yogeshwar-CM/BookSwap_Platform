@@ -4,7 +4,9 @@
   justify-content: space-evenly;
   align-items: center;
 }
-
+.register-text {
+  cursor: pointer;
+}
 .wh1 {
   transform: translateX(-4rem);
   font-size: clamp(1rem, 1.1549rem + 3.6056vw, 4rem);
