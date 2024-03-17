@@ -1,3 +1,5 @@
+// routes/books.js
+
 const express = require("express");
 const router = express.Router();
 const Book = require("../models/Book");
@@ -19,13 +21,25 @@ router.get("/:id", getBook, (req, res) => {
 
 // POST a new book
 router.post("/", async (req, res) => {
+  const {
+    owner,
+    age,
+    title,
+    comment,
+    contactNumber,
+    address,
+    location,
+    imageUrl,
+  } = req.body;
   const book = new Book({
-    owner: req.body.owner,
-    age: req.body.age,
-    title: req.body.title,
-    comment: req.body.comment,
-    contactNumber: req.body.contactNumber,
-    address: req.body.address,
+    owner,
+    age,
+    title,
+    comment,
+    contactNumber,
+    address,
+    location,
+    imageUrl,
   });
 
   try {
@@ -38,23 +52,39 @@ router.post("/", async (req, res) => {
 
 // UPDATE a book by ID
 router.patch("/:id", getBook, async (req, res) => {
-  if (req.body.owner != null) {
-    res.book.owner = req.body.owner;
+  const {
+    owner,
+    age,
+    title,
+    comment,
+    contactNumber,
+    address,
+    location,
+    imageUrl,
+  } = req.body;
+  if (owner != null) {
+    res.book.owner = owner;
   }
-  if (req.body.age != null) {
-    res.book.age = req.body.age;
+  if (age != null) {
+    res.book.age = age;
   }
-  if (req.body.title != null) {
-    res.book.title = req.body.title;
+  if (title != null) {
+    res.book.title = title;
   }
-  if (req.body.comment != null) {
-    res.book.comment = req.body.comment;
+  if (comment != null) {
+    res.book.comment = comment;
   }
-  if (req.body.contactNumber != null) {
-    res.book.contactNumber = req.body.contactNumber;
+  if (contactNumber != null) {
+    res.book.contactNumber = contactNumber;
   }
-  if (req.body.address != null) {
-    res.book.address = req.body.address;
+  if (address != null) {
+    res.book.address = address;
+  }
+  if (location != null) {
+    res.book.location = location;
+  }
+  if (imageUrl != null) {
+    res.book.imageUrl = imageUrl;
   }
   try {
     const updatedBook = await res.book.save();

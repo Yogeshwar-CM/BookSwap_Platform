@@ -2,3 +2,8 @@
   text-decoration: none;
   color: var(--font);
 }
+
+body {
+  height: 100vh;
+  background-color: #09090b;
+}

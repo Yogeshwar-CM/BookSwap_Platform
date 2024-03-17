@@ -15,7 +15,9 @@ const bookSchema = new mongoose.Schema({
   },
   comment: String,
   contactNumber: String,
+  location: String,
   address: String,
+  imageUrl: String,
 });
 
 const Book = mongoose.model("Book", bookSchema);

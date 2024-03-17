@@ -1,22 +1,23 @@
 import React from "react";
 import "./ExpSec.css";
-import b1 from "../assets/b1.png";
-import profile from "../assets/profile.png";
 
-const ExpSec = () => {
+const ExpSec = ({ imageUrl, title, age, location, description }) => {
   return (
     <div className="expsec">
-      <img src={b1} alt="" />
+      <img src={imageUrl} alt="" />
       <div className="exp-dets">
-        <p>Stephen Hawking - Theory of Everything</p>
-        <p>3 Years | Chennai</p>
+        <p>
+          {title} - {age}
+        </p>
+        <p>
+          {age} | {location}
+        </p>
         <br />
         <br />
-        <p>Looking for any Fiction or Non Fiction books in good condition</p>
+        <p>{description}</p>
       </div>
-      <button className="swap-btn">SWAP</button> 
+      <button className="swap-btn">SWAP</button>
       <button className="contact-btn">Contact</button>
-      <img src={profile} alt="" className="profile"/>
     </div>
   );
 };
