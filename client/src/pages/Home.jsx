@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toastify
 import tempIMG from "../assets/b1.png";
 import axios from "axios";
 import ContactDetails from "../components/ContactDetails";
+import Swap from "../components/Swap";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -20,6 +21,7 @@ const Home = () => {
     address: "",
     imageUrl: "",
   });
+  const [isSwapPopupOpen, setIsSwapPopupOpen] = useState(false); // State for managing Swap popup
   const currentUser = sessionStorage.getItem("userName");
 
   useEffect(() => {
@@ -118,8 +120,22 @@ const Home = () => {
     }
   };
 
+  const handleSwapButtonClick = (bookId) => {
+    // Open the Swap popup for the selected book
+    setSelectedUserId(bookId);
+    setIsSwapPopupOpen(true);
+  };
+
+  const handleCloseSwapPopup = () => {
+    // Close the Swap popup
+    setIsSwapPopupOpen(false);
+  };
+
   return (
     <div className="Home">
+      {isSwapPopupOpen && (
+        <Swap onClose={handleCloseSwapPopup} isOpen={isSwapPopupOpen} />
+      )}
       <h2>Search what books you want</h2>
       <div className="bd1"></div>
       <div className="bd"></div>
@@ -200,7 +216,9 @@ const Home = () => {
         <input type="text" className="search-fields" placeholder="Title" />
         <input type="text" className="search-fields" placeholder="Location" />
         <input type="number" className="search-fields" placeholder="Max Age" />
-        <button type="submit" className="search-books-btn">Search</button>
+        <button type="submit" className="search-books-btn">
+          Search
+        </button>
       </form>
       <div className="exp">
         {books.map((book) => (
@@ -217,7 +235,12 @@ const Home = () => {
               <br />
               <p>{book.comment}</p>
             </div>
-            <button className="swap-btn">SWAP</button>
+            <button
+              className="swap-btn"
+              onClick={() => handleSwapButtonClick(book._id)}
+            >
+              SWAP
+            </button>
             <button
               className="contact-btn"
               onClick={() => handleContactClick(book._id)}

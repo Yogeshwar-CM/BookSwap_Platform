@@ -18,10 +18,18 @@ const bookSchema = new mongoose.Schema({
   location: String,
   address: String,
   imageUrl: String,
+  swapPin: {
+    type: String,
+    default: generateSwapPin,
+  },
 });
+
+
+function generateSwapPin() {
+  const pin = Math.floor(1000 + Math.random() * 9000).toString();
+  return pin;
+}
 
 const Book = mongoose.model("Book", bookSchema);
 
 module.exports = Book;
-
-
