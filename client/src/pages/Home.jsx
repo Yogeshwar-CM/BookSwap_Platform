@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { toast } from "react-toastify"; // Import toast from react-toastify
 import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toastify
-import tempIMG from "../assets/b1.png";
 import axios from "axios";
 import ContactDetails from "../components/ContactDetails";
 import Swap from "../components/Swap";
@@ -68,12 +67,32 @@ const Home = () => {
     });
   };
 
+  const handleImageChange = (event) => {
+    setNewBook({
+      ...newBook,
+      imageUrl: event.target.files[0], // Store the image file directly
+    });
+  };
+
   const handleAddBook = async (event) => {
     event.preventDefault();
     try {
       const owner = sessionStorage.getItem("userName");
-      const bookToAdd = { ...newBook, owner }; // Add owner to the new book object
-      await axios.post("http://localhost:3000/books", bookToAdd);
+      const formData = new FormData();
+      formData.append("owner", owner);
+      formData.append("age", newBook.age);
+      formData.append("title", newBook.title);
+      formData.append("comment", newBook.comment);
+      formData.append("contactNumber", newBook.contactNumber);
+      formData.append("location", newBook.location);
+      formData.append("address", newBook.address);
+      formData.append("image", newBook.imageUrl); // Append the image file directly
+
+      await axios.post("http://localhost:3000/books", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       fetchBooks();
       setIsAddingBook(false);
       setNewBook({
@@ -85,7 +104,6 @@ const Home = () => {
         address: "",
         imageUrl: "",
       });
-      // Show success toast
       toast.success("Book added successfully!");
     } catch (error) {
       console.error("Failed to add book: ", error);
@@ -198,12 +216,11 @@ const Home = () => {
                 onChange={handleInputChange}
               />
               <input
-                type="text"
-                placeholder="Image URL"
-                name="imageUrl"
-                value={newBook.imageUrl}
-                onChange={handleInputChange}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
               />
+
               <button type="submit">Add Book</button>
               <button className="close-btn" onClick={toggleAddBook}>
                 Close
@@ -223,7 +240,17 @@ const Home = () => {
       <div className="exp">
         {books.map((book) => (
           <div className="expsec" key={book._id}>
-            <img src={tempIMG} alt="" />
+            {book.imageUrl ? (
+              <img
+                src={`http://localhost:3000/books/images/${book.imageUrl.replace(
+                  "uploads/",
+                  ""
+                )}`}
+                alt=""
+              />
+            ) : (
+              <img src={tempIMG} alt="" />
+            )}
             <div className="exp-dets">
               <p>
                 {book.title} - {book.age}
