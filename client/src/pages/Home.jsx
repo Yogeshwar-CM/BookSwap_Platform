@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
+import { toast } from "react-toastify"; // Import toast from react-toastify
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toastify
 import tempIMG from "../assets/b1.png";
 import axios from "axios";
 import ContactDetails from "../components/ContactDetails";
@@ -7,9 +9,9 @@ import ContactDetails from "../components/ContactDetails";
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserContactInfo, setSelectedUserContactInfo] = useState(null); // State to store contact info
   const [isAddingBook, setIsAddingBook] = useState(false);
   const [newBook, setNewBook] = useState({
-    owner: "",
     age: "",
     title: "",
     comment: "",
@@ -18,23 +20,35 @@ const Home = () => {
     address: "",
     imageUrl: "",
   });
+  const currentUser = sessionStorage.getItem("userName");
 
   useEffect(() => {
     fetchBooks();
   }, []);
 
-  const handleContactClick = (userId) => {
+  const handleContactClick = async (userId) => {
     setSelectedUserId(userId);
+    try {
+      // Fetch the book details to get the owner's contact information
+      const response = await axios.get(`http://localhost:3000/books/${userId}`);
+      setSelectedUserContactInfo(response.data._id); // Assuming 'owner' property contains the contact information
+    } catch (error) {
+      console.error("Failed to fetch contact info: ", error);
+    }
   };
 
   const handleCloseContactDetails = () => {
     setSelectedUserId(null);
+    setSelectedUserContactInfo(null); // Reset contact info when closing contact details
   };
 
   const fetchBooks = async () => {
     try {
       const response = await axios.get("http://localhost:3000/books");
-      setBooks(response.data);
+      const filteredBooks = response.data.filter(
+        (book) => book.owner !== currentUser
+      );
+      setBooks(filteredBooks);
     } catch (error) {
       console.error("Failed to fetch books: ", error);
     }
@@ -55,11 +69,12 @@ const Home = () => {
   const handleAddBook = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3000/books", newBook);
+      const owner = sessionStorage.getItem("userName");
+      const bookToAdd = { ...newBook, owner }; // Add owner to the new book object
+      await axios.post("http://localhost:3000/books", bookToAdd);
       fetchBooks();
       setIsAddingBook(false);
       setNewBook({
-        owner: "",
         age: "",
         title: "",
         comment: "",
@@ -68,8 +83,38 @@ const Home = () => {
         address: "",
         imageUrl: "",
       });
+      // Show success toast
+      toast.success("Book added successfully!");
     } catch (error) {
       console.error("Failed to add book: ", error);
+    }
+  };
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    try {
+      const title = document.querySelector(
+        ".search-fields[placeholder='Title']"
+      ).value;
+      const location = document.querySelector(
+        ".search-fields[placeholder='Location']"
+      ).value;
+      const maxAge = document.querySelector(
+        ".search-fields[placeholder='Max Age']"
+      ).value;
+
+      const response = await axios.get("http://localhost:3000/books");
+      const filteredBooks = response.data.filter((book) => {
+        return (
+          (!title || book.title.toLowerCase().includes(title.toLowerCase())) &&
+          (!location ||
+            book.location.toLowerCase().includes(location.toLowerCase())) &&
+          (!maxAge || parseInt(book.age) <= parseInt(maxAge))
+        );
+      });
+      setBooks(filteredBooks);
+    } catch (error) {
+      console.error("Failed to search books: ", error);
     }
   };
 
@@ -78,12 +123,13 @@ const Home = () => {
       <h2>Search what books you want</h2>
       <div className="bd1"></div>
       <div className="bd"></div>
-      {selectedUserId && (
+      {selectedUserId && selectedUserContactInfo && (
         <ContactDetails
-          userId={selectedUserId}
+          info={selectedUserContactInfo} // Pass address
           onClose={handleCloseContactDetails}
         />
       )}
+
       <button className="add-book-btn" onClick={toggleAddBook}>
         Add New Book
       </button>
@@ -93,13 +139,6 @@ const Home = () => {
             <h3>Add New Book</h3>
 
             <form onSubmit={handleAddBook} className="add-b">
-              <input
-                type="text"
-                placeholder="Owner"
-                name="owner"
-                value={newBook.owner}
-                onChange={handleInputChange}
-              />
               <input
                 type="number"
                 placeholder="Age"
@@ -157,11 +196,11 @@ const Home = () => {
           </div>
         </div>
       )}
-      <form className="search-books">
-        <input type="text" className="search-fields" value="Sci-Fi" />
-        <input type="text" className="search-fields" value="Chennai" />
-        <input type="date" className="search-fields" />
-        <input type="text" className="search-fields" value="4+ Reviews" />
+      <form className="search-books" onSubmit={handleSearch}>
+        <input type="text" className="search-fields" placeholder="Title" />
+        <input type="text" className="search-fields" placeholder="Location" />
+        <input type="number" className="search-fields" placeholder="Max Age" />
+        <button type="submit" className="search-books-btn">Search</button>
       </form>
       <div className="exp">
         {books.map((book) => (
@@ -181,7 +220,7 @@ const Home = () => {
             <button className="swap-btn">SWAP</button>
             <button
               className="contact-btn"
-              onClick={() => handleContactClick(book.ownerId)}
+              onClick={() => handleContactClick(book._id)}
             >
               Contact
             </button>

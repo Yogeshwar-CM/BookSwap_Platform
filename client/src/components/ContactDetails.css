@@ -2,30 +2,35 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  color: black;
   transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 2rem;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
-.contact-details h3 {
-  margin-bottom: 1rem;
+.contact-details-title {
+  margin-top: 0;
 }
 
-.contact-details p {
-  margin-bottom: 0.5rem;
+.contact-details-info {
+  margin-bottom: 10px;
 }
 
-.contact-details button {
-  background-color: #007bff;
-  color: #fff;
+.contact-details-close-btn {
+  background-color: #f44336;
+  color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 3px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.contact-details button:hover {
-  background-color: #0056b3;
+.contact-details-close-btn:hover {
+  background-color: #d32f2f;
 }

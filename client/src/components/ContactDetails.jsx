@@ -1,34 +1,40 @@
-// ContactDetails.js
 import React, { useState, useEffect } from "react";
+import "./ContactDetails.css";
 import axios from "axios";
 
-const ContactDetails = ({ userId, onClose }) => {
-  const [userDetails, setUserDetails] = useState(null);
+const ContactDetails = (props) => {
+  const [contactInfo, setContactInfo] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
+    const fetchContactInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/users/${userId}`
+          `http://localhost:3000/books/${props.info}`
         );
-        setUserDetails(response.data);
+        const { owner, contactNumber, address } = response.data;
+        setContactInfo(owner);
+        setContactNumber(contactNumber);
+        setAddress(address);
       } catch (error) {
-        console.error("Failed to fetch user details: ", error);
+        console.error("Failed to fetch contact info: ", error);
       }
     };
-    fetchUserDetails();
-  }, [userId]);
+    fetchContactInfo();
+  }, [props.info]);
 
   return (
     <div className="contact-details">
       <h3>Contact Details</h3>
-      {userDetails && (
-        <div>
-          <p>Address: {userDetails.address}</p>
-          <p>Phone Number: {userDetails.phoneNumber}</p>
-        </div>
+      {contactInfo && (
+        <>
+          <h2>Owner: {contactInfo}</h2>
+          <p>Phone Number: {contactNumber}</p>
+          <p>Address: {address}</p>
+        </>
       )}
-      <button onClick={onClose}>Close</button>
+      <button onClick={props.onClose}>Close</button>
     </div>
   );
 };
