@@ -1,10 +1,7 @@
-// routes/books.js
-
 const express = require("express");
 const router = express.Router();
 const Book = require("../models/Book");
 
-// GET all books
 router.get("/", async (req, res) => {
   try {
     const books = await Book.find();
@@ -14,12 +11,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET a single book by ID
 router.get("/:id", getBook, (req, res) => {
   res.json(res.book);
 });
 
-// POST a new book
 router.post("/", async (req, res) => {
   const {
     owner,
@@ -28,7 +23,7 @@ router.post("/", async (req, res) => {
     comment,
     contactNumber,
     address,
-    location,
+    location, 
     imageUrl,
   } = req.body;
   const book = new Book({
@@ -50,7 +45,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// UPDATE a book by ID
 router.patch("/:id", getBook, async (req, res) => {
   const {
     owner,
@@ -94,17 +88,15 @@ router.patch("/:id", getBook, async (req, res) => {
   }
 });
 
-// DELETE a book by ID
 router.delete("/:id", getBook, async (req, res) => {
   try {
-    await res.book.remove();
+    await Book.findByIdAndDelete(req.params.id);
     res.json({ message: "Book deleted" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Middleware function to get a single book by ID
 async function getBook(req, res, next) {
   let book;
   try {

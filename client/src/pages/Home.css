@@ -1,8 +1,9 @@
 .Home {
   display: flex;
-  padding-bottom: 10rem;
   flex-direction: column;
   align-items: center;
+  width: 100vw;
+  padding-bottom: 10rem;
 }
 
 .Home h2 {
@@ -19,10 +20,134 @@
 
 .search-books {
   display: flex;
-  border-radius: 5px;
+  justify-content: space-evenly;
+  gap: 1rem;
   margin-top: 4rem;
   padding: 2rem 4rem;
   background: var(--secondary);
-  justify-content: space-evenly;
+  border-radius: 5px;
+}
+
+.expsec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* or adjust as needed */
+  margin-top: 5rem;
+  font-size: clamp(1.15rem, 1.062rem + 0.3756vw, 1.4rem);
+  gap: 8rem;
+}
+
+.expsec img {
+  height: 16rem;
+}
+
+.exp-dets {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile {
+  border-radius: 1000000px;
+  max-height: 8rem;
+}
+
+.swap-btn,
+.contact-btn {
+  padding: 0.5rem 1.5rem;
+  font-size: clamp(1rem, 0.9296rem + 0.3005vw, 1.15rem);
+  background: var(--theme);
+  color: var(--font);
+  height: 2.6rem;
+  border-radius: 3px;
+  margin-top: 1.2rem;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  backdrop-filter: blur(5px); /* Apply blur effect to background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-b {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.add-book-btn {
+  padding: 0.6rem 1.1rem;
+  border: none;
+  background: #2260e5;
+  font-size: 1.1rem;
+  position: absolute;
+  cursor: pointer;
+  right: 2rem;
+  top: 1rem;
+  color: #fff;
+}
+
+.add-b input {
+  border-radius: 3px;
+  border: 1px solid #858585;
+  padding: 0.6rem 1.1rem;
+  font-size: 1.2rem;
+}
+
+.add-b button {
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  background-color: #2260e5;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+}
+
+.add-book-form {
+  background-color: #363636;
+  padding: 2rem 4rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  border: none;
+  font-size: 1rem;
+  background: #2260e5;
+  color: #fff;
+  cursor: pointer;
+}
+
+.bd1 {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 200rem;
+  background-color: #4d1b65;
+  filter: blur(80px) opacity(0.5);
+  position: absolute;
+  top: 2rem;
+  right: -16rem;
+}
+.bd {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 200rem;
+  background-color: #4d1b65;
+  filter: blur(80px) opacity(0.5);
+  position: absolute;
+  top: 30rem;
+  left: -9rem;
 }

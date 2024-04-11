@@ -14,16 +14,32 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(true); 
+  const [isLogin, setIsLogin] = useState(true);
 
   const handleAuthAction = async (e) => {
     e.preventDefault();
     try {
+      let userId = null;
+      let userName = null;
       if (isLogin) {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        userId = userCredential.user.uid;
+        userName = userCredential.user.displayName;
       } else {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        userId = userCredential.user.uid;
+        userName = userCredential.user.displayName;
       }
+      sessionStorage.setItem("userId", userId); // Store user ID in sessionStorage
+      sessionStorage.setItem("userName", userName); // Store user name in sessionStorage
       navigate("/home");
     } catch (error) {
       window.alert(error.message);
@@ -33,7 +49,11 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+      const userId = userCredential.user.uid;
+      const userName = userCredential.user.displayName;
+      sessionStorage.setItem("userId", userId); // Store user ID in sessionStorage
+      sessionStorage.setItem("userName", userName); // Store user name in sessionStorage
       navigate("/home");
     } catch (error) {
       console.error(error.message);
