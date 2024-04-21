@@ -10,7 +10,12 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+// Middleware
+const corsOptions = {
+  origin: "https://swook.vercel.app",
+};
+
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 mongoose
