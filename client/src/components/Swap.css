@@ -7,6 +7,8 @@
   background-color: rgba(0, 0, 0, 0.5); /* Dark background with opacity */
   display: flex;
   justify-content: center;
+  font-size: 2rem;
+  padding: 2rem;
   align-items: center;
   z-index: 9999;
 }
@@ -20,8 +22,8 @@
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: -10px;
+  right: -10px;
   background-color: transparent;
   color: white;
   border: none;

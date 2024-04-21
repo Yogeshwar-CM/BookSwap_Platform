@@ -13,7 +13,7 @@ const Swap = ({ onClose }) => {
 
   const fetchUserBooks = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/books`);
+      const response = await axios.get(`http://https://book-swapping-platform.vercel.app:3000/books`);
       const filteredBooks = response.data.filter(
         (book) => book.owner === currentUser
       );
@@ -25,7 +25,7 @@ const Swap = ({ onClose }) => {
 
   const handleDeleteBook = async (bookId) => {
     try {
-      await axios.delete(`http://localhost:3000/books/${bookId}`);
+      await axios.delete(`http://https://book-swapping-platform.vercel.app:3000/books/${bookId}`);
       setUserBooks(userBooks.filter((book) => book._id !== bookId));
       alert("Book deleted successfully!");
     } catch (error) {
@@ -41,7 +41,7 @@ const Swap = ({ onClose }) => {
 
     try {
       // Fetch all books from the server
-      const response = await axios.get("http://localhost:3000/books");
+      const response = await axios.get("http://https://book-swapping-platform.vercel.app:3000/books");
       const allBooks = response.data;
 
       // Find the book with the entered swapPin
@@ -54,7 +54,7 @@ const Swap = ({ onClose }) => {
       }
 
       // Delete the book using its _id
-      await axios.delete(`http://localhost:3000/books/${bookToDelete._id}`);
+      await axios.delete(`http://https://book-swapping-platform.vercel.app:3000/books/${bookToDelete._id}`);
 
       // Update the userBooks state to remove the deleted book
       setUserBooks(userBooks.filter((book) => book._id !== bookToDelete._id));
