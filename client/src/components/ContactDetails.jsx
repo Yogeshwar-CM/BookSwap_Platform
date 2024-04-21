@@ -11,7 +11,7 @@ const ContactDetails = (props) => {
     const fetchContactInfo = async () => {
       try {
         const response = await axios.get(
-          `http://https://book-swapping-platform.vercel.app:3000/books/${props.info}`
+          `https://book-swapping-platform.vercel.app:3000/books/${props.info}`
         );
         const { owner, contactNumber, address } = response.data;
         setContactInfo(owner);

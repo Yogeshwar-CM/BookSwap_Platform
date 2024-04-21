@@ -31,7 +31,7 @@ const Home = () => {
     setSelectedUserId(userId);
     try {
       // Fetch the book details to get the owner's contact information
-      const response = await axios.get(`http://https://book-swapping-platform.vercel.app:3000/books/${userId}`);
+      const response = await axios.get(`https://book-swapping-platform.vercel.app:3000/books/${userId}`);
       setSelectedUserContactInfo(response.data._id); // Assuming 'owner' property contains the contact information
     } catch (error) {
       console.error("Failed to fetch contact info: ", error);
@@ -45,7 +45,7 @@ const Home = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("http://https://book-swapping-platform.vercel.app:3000/books");
+      const response = await axios.get("https://book-swapping-platform.vercel.app:3000/books");
       const filteredBooks = response.data.filter(
         (book) => book.owner !== currentUser
       );
@@ -88,7 +88,7 @@ const Home = () => {
       formData.append("address", newBook.address);
       formData.append("image", newBook.imageUrl); // Append the image file directly
 
-      await axios.post("http://https://book-swapping-platform.vercel.app:3000/books", formData, {
+      await axios.post("https://book-swapping-platform.vercel.app:3000/books", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -123,7 +123,7 @@ const Home = () => {
         ".search-fields[placeholder='Max Age']"
       ).value;
 
-      const response = await axios.get("http://https://book-swapping-platform.vercel.app:3000/books");
+      const response = await axios.get("https://book-swapping-platform.vercel.app:3000/books");
       const filteredBooks = response.data.filter((book) => {
         return (
           (!title || book.title.toLowerCase().includes(title.toLowerCase())) &&
@@ -242,7 +242,7 @@ const Home = () => {
           <div className="expsec" key={book._id}>
             {book.imageUrl ? (
               <img
-                src={`http://https://book-swapping-platform.vercel.app:3000/books/images/${book.imageUrl.replace(
+                src={`https://book-swapping-platform.vercel.app:3000/books/images/${book.imageUrl.replace(
                   "uploads/",
                   ""
                 )}`}
