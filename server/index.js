@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
+app.use("/", () => {
+  return("This is a server for Book Swapping Platform")
+})
+
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI, {
