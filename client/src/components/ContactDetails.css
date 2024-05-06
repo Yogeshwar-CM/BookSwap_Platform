@@ -1,15 +1,13 @@
 .contact-details {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  color: black;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 3px;
+  font-size: 2rem;
+  top: 40%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .contact-details-title {
@@ -22,6 +20,7 @@
 
 .contact-details-close-btn {
   background-color: #f44336;
+  margin-top: 2rem;
   color: white;
   border: none;
   padding: 10px 20px;

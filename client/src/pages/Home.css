@@ -30,7 +30,7 @@
 
 .expsec {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%; /* or adjust as needed */
   margin-top: 5rem;

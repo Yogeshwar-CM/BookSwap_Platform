@@ -78,7 +78,7 @@ const Swap = ({ onClose }) => {
             <div className="book-item" key={book._id}>
               <h3>{book.title}</h3>
               <p>PIN: {book.swapPin}</p>
-              <button onClick={() => handleDeleteBook(book._id)}>Delete</button>
+              <button onClick={() => handleDeleteBook(book._id)} className="delete-btn">Delete</button>
             </div>
           ))}
         </div>

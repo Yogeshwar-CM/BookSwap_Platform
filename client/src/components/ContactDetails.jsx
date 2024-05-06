@@ -34,7 +34,9 @@ const ContactDetails = (props) => {
           <p>Address: {address}</p>
         </>
       )}
-      <button onClick={props.onClose}>Close</button>
+      <button onClick={props.onClose} className="contact-details-close-btn">
+        Close
+      </button>
     </div>
   );
 };
