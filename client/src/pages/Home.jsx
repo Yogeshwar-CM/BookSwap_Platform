@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
-import { toast } from "react-toastify"; // Import toast from react-toastify
-import "react-toastify/dist/ReactToastify.css"; // Import the CSS for toastify
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ContactDetails from "../components/ContactDetails";
 import Swap from "../components/Swap";
@@ -9,7 +9,7 @@ import Swap from "../components/Swap";
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [selectedUserContactInfo, setSelectedUserContactInfo] = useState(null); // State to store contact info
+  const [selectedUserContactInfo, setSelectedUserContactInfo] = useState(null);
   const [isAddingBook, setIsAddingBook] = useState(false);
   const [newBook, setNewBook] = useState({
     age: "",
@@ -20,7 +20,7 @@ const Home = () => {
     address: "",
     imageUrl: "",
   });
-  const [isSwapPopupOpen, setIsSwapPopupOpen] = useState(false); // State for managing Swap popup
+  const [isSwapPopupOpen, setIsSwapPopupOpen] = useState(false);
   const currentUser = sessionStorage.getItem("userName");
 
   useEffect(() => {
@@ -30,11 +30,10 @@ const Home = () => {
   const handleContactClick = async (userId) => {
     setSelectedUserId(userId);
     try {
-      // Fetch the book details to get the owner's contact information
       const response = await axios.get(
         `https://bookswap-platform.onrender.com/books/${userId}`
       );
-      setSelectedUserContactInfo(response.data._id); // Assuming 'owner' property contains the contact information
+      setSelectedUserContactInfo(response.data._id);
     } catch (error) {
       console.error("Failed to fetch contact info: ", error);
     }
@@ -42,7 +41,7 @@ const Home = () => {
 
   const handleCloseContactDetails = () => {
     setSelectedUserId(null);
-    setSelectedUserContactInfo(null); // Reset contact info when closing contact details
+    setSelectedUserContactInfo(null);
   };
 
   const fetchBooks = async () => {
@@ -74,7 +73,7 @@ const Home = () => {
   const handleImageChange = (event) => {
     setNewBook({
       ...newBook,
-      imageUrl: event.target.files[0], // Store the image file directly
+      imageUrl: event.target.files[0],
     });
   };
 
@@ -90,7 +89,7 @@ const Home = () => {
       formData.append("contactNumber", newBook.contactNumber);
       formData.append("location", newBook.location);
       formData.append("address", newBook.address);
-      formData.append("image", newBook.imageUrl); // Append the image file directly
+      formData.append("image", newBook.imageUrl);
 
       await axios.post(
         "https://bookswap-platform.onrender.com/books",
@@ -149,13 +148,11 @@ const Home = () => {
   };
 
   const handleSwapButtonClick = (bookId) => {
-    // Open the Swap popup for the selected book
     setSelectedUserId(bookId);
     setIsSwapPopupOpen(true);
   };
 
   const handleCloseSwapPopup = () => {
-    // Close the Swap popup
     setIsSwapPopupOpen(false);
   };
 
@@ -169,7 +166,7 @@ const Home = () => {
       <div className="bd"></div>
       {selectedUserId && selectedUserContactInfo && (
         <ContactDetails
-          info={selectedUserContactInfo} // Pass address
+          info={selectedUserContactInfo}
           onClose={handleCloseContactDetails}
         />
       )}
@@ -261,17 +258,17 @@ const Home = () => {
             ) : (
               <img src={tempIMG} alt="" />
             )}
-            <div className="exp-dets">
-              <p>
-                {book.title} - {book.age}
-              </p>
-              <p>
-                {book.age} | {book.location}
-              </p>
-              <br />
-              <br />
-              <p>{book.comment}</p>
-            </div>
+
+            <p className="bt">
+              {book.title} - {book.age}
+            </p>
+            <p className="bl">
+              {book.age} | {book.location}
+            </p>
+            <br />
+            <br />
+            <p className="bc">{book.comment}</p>
+
             <button
               className="swap-btn"
               onClick={() => handleSwapButtonClick(book._id)}

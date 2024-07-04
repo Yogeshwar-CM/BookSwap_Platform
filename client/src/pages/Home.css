@@ -29,24 +29,52 @@
 }
 
 .expsec {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%; /* or adjust as needed */
-  margin-top: 5rem;
-  font-size: clamp(1.15rem, 1.062rem + 0.3756vw, 1.4rem);
-  gap: 8rem;
+  display: grid;
+  border-radius: 0.2rem;
+  width: 80vw;
+  height: 14rem;
+  background-color: #3c055c;
+  padding: 1.2rem;
+  padding-right: 2rem;
+  margin-top: 2.5rem;
+  gap: 2rem;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "imgg bt . ."
+    "imgg bc sb cb"
+    "imgg bl . .";
+  grid-template-columns: 1fr 2fr 0.5fr 0.5fr;
 }
 
-.expsec img {
-  height: 16rem;
+.expsec > img {
+  height: 14rem;
+  grid-area: imgg;
+}
+.bt {
+  grid-area: bt;
+  font-size: 1.5rem;
+  width: 35vw;
+}
+.bc {
+  font-size: 1.2rem;
+  grid-area: bc;
+}
+.bl {
+  font-size: 1.25rem;
+  grid-area: bl;
+}
+.swap-btn {
+  grid-area: sb;
+}
+.contact-btn {
+  grid-area: cb;
 }
 
-.exp-dets {
+/* .exp-dets {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
+} */
 
 .profile {
   border-radius: 1000000px;
@@ -72,8 +100,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  backdrop-filter: blur(5px); /* Apply blur effect to background */
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;

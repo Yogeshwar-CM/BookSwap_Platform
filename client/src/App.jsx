@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import ToggleTheme from "./components/ToggleTheme";
 import Welcome from "./pages/Welcome";
 import Home from "./pages/Home";
+import Info from "./pages/Info";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />}></Route>
           <Route path="/home" element={<Home />}></Route>
+          <Route path="/info" element={<Info />}></Route>
         </Routes>
       </BrowserRouter>
     </>
